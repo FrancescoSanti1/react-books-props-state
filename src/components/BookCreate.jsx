@@ -15,11 +15,11 @@ export default function BookCreate({ onCreate }) {
         setTitle('');
     }
 
-    return <div>
+    return <div className="book-create">
         <form onSubmit={handleSubmit}>
-            <label >Title</label>
-            <input type="text" value={title} onChange={handleChange} />
-            <button>Create</button>
+            <label>Title</label>
+            <input className="input" type="text" value={title} onChange={handleChange} />
+            <button className="button">Create</button>
         </form>
     </div>
 }
