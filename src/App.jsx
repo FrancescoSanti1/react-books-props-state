@@ -1,12 +1,12 @@
 import './App.css';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
-import BooksContext from './contexts/books';
+import useBooksContext from './hooks/useBooksContext';
 
 export default function App() {
 
-  const { fetchBooks } = useContext(BooksContext);
+  const { fetchBooks } = useBooksContext();
 
   useEffect(() => {
     fetchBooks();
