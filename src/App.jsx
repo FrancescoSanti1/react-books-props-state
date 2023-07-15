@@ -14,9 +14,18 @@ export default function App() {
     setBooks(books.filter((book) => book.id !== id));
   }
 
+  const editBook = (id, newTitle) => {
+    setBooks(books.map((book) => {
+      if (book.id === id) {
+        return { ...book, title: newTitle }
+      }
+      return book;
+    }));
+  }
+
   return (
     <div>
-      <BookList books={books} onDelete={deleteBook} />
+      <BookList books={books} onDelete={deleteBook} onEdit={editBook} />
       <BookCreate onCreate={createBook} />
     </div>
   );
