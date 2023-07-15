@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function BookEdit({ book, onEdit }) {
+export default function BookEdit({ book, onSubmit }) {
 
     const [title, setTitle] = useState(book.title);
 
@@ -11,7 +11,7 @@ export default function BookEdit({ book, onEdit }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        onEdit(book.id, title);
+        onSubmit(book.id, title);
     }
 
     return <form onSubmit={handleSubmit} className="book-edit">
