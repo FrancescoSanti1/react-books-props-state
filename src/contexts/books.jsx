@@ -1,16 +1,45 @@
+import axios from "axios";
 import { createContext, useState } from "react";
 
 const BooksContext = createContext();
 
 export function Provider({ children }) {
-    const [count, setCount] = useState(5);
+    const [books, setBooks] = useState([]);
 
-    const value = {
-        count,
-        incrementCount: () => { setCount(count + 1) }
+    const fetchBooks = async () => {
+        const response = await axios.get("http://localhost:3001/books");
+        setBooks(response.data);
     }
 
-    return <BooksContext.Provider value={value}>
+    const createBook = async (title) => {
+        const response = await axios.post("http://localhost:3001/books", { title });
+        setBooks([...books, response.data]);
+    }
+
+    const deleteBook = async (id) => {
+        await axios.delete(`http://localhost:3001/books/${id}`);
+
+        setBooks(books.filter((book) => book.id !== id));
+    }
+
+    const editBook = async (id, newTitle) => {
+        const response = await axios.put(`http://localhost:3001/books/${id}`, { title: newTitle });
+
+        setBooks(books.map((book) => {
+            if (book.id === id) {
+                return { ...book, ...response.data }
+            }
+            return book;
+        }));
+    }
+
+    return <BooksContext.Provider value={{
+        books,
+        fetchBooks,
+        createBook,
+        editBook,
+        deleteBook
+    }}>
         {children}
     </BooksContext.Provider>
 }

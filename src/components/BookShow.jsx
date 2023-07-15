@@ -1,16 +1,15 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import BookEdit from "./BookEdit";
+import BooksContext from "../contexts/books";
 
-export default function BookShow({ book, onDelete, onEdit }) {
+export default function BookShow({ book }) {
 
     const [edit, setEdit] = useState(false);
+    const { deleteBook } = useContext(BooksContext);
 
     const handleEdit = () => { setEdit(!edit) }
-    const handleDelete = () => { onDelete(book.id) }
-    const handleSubmit = (id, title) => {
-        onEdit(id, title);
-        setEdit(false);
-    }
+    const handleDelete = () => { deleteBook(book.id) }
+    const handleSubmit = () => { setEdit(false); }
 
     return <div className="book-show">
         <img src={`https://picsum.photos/seed/${book.id}/300/200`} alt="book cover" />
