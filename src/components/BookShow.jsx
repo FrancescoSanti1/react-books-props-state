@@ -13,6 +13,7 @@ export default function BookShow({ book, onDelete, onEdit }) {
     }
 
     return <div className="book-show">
+        <img src={`https://picsum.photos/seed/${book.id}/300/200`} alt="book cover" />
         <div>{edit ? <BookEdit onSubmit={handleSubmit} book={book} /> : <h3>{book.title}</h3>}</div>
         <div className="actions">
             <button className="edit" onClick={handleEdit}>Edit</button>

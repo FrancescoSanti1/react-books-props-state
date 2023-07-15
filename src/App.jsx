@@ -24,7 +24,8 @@ export default function App() {
   }
 
   return (
-    <div>
+    <div className='app'>
+      <h1>Reading list</h1>
       <BookList books={books} onDelete={deleteBook} onEdit={editBook} />
       <BookCreate onCreate={createBook} />
     </div>
