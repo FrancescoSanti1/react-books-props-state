@@ -2,12 +2,14 @@ import './App.css';
 import { useState } from 'react';
 import BookCreate from './components/BookCreate';
 import BookList from './components/BookList';
+import axios from 'axios';
 
 export default function App() {
   const [books, setBooks] = useState([]);
 
-  const createBook = (title) => {
-    setBooks([...books, { id: books.length, title }])
+  const createBook = async (title) => {
+    const response = await axios.post("http://localhost:3001/books", { title });
+    setBooks([...books, response.data]);
   }
 
   const deleteBook = (id) => {
